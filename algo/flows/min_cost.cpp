@@ -73,21 +73,18 @@ public:
 		fill(d, d + G.n, cost_inf);
 		d[G.s] = 0;
 		q.emplace(d[G.s], G.s);
-		while (q.size())
-		{
+		while (q.size()) {
 			int v = q.top().Y;
 			cost_t s = q.top().X;
 			q.pop();
 			if (s != d[v])
 				continue;
-			for (int e: g[v])
-			{
+			for (int e: g[v]) {
 				int to = es[e].to;
 				if (es[e].f == es[e].c)
 					continue;
 				cost_t tos = es[e].cost + pot[v] - pot[to] + s;
-				if (tos < d[to])
-				{
+				if (tos < d[to]) {
 					d[to] = tos;
 					from[to] = e;
 					q.emplace(d[to], to);
@@ -133,13 +130,11 @@ void test() {
 	int S = 0, T = 2 * n + 1;
 	Network G(2 * n + 2, S, T);
 	for (int i = 0; i < n; ++i)
-		for (int j = 0; j < n; ++j)
-		{
+		for (int j = 0; j < n; ++j) {
 			cin >> a[i][j];
 			G.add_edge(i + 1, n + j + 1, 1, a[i][j]);
 		}
-	for (int i = 0; i < n; ++i)
-	{
+	for (int i = 0; i < n; ++i) {
 		G.add_edge(S, i + 1, 1, 0);
 		G.add_edge(n + i + 1, T, 1, 0);
 	}
